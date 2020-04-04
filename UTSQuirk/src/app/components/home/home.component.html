@@ -1,0 +1,6 @@
+<div *ngIf="user; else elseBlock">
+    <p>User logged in: {{ user }}</p>
+</div>
+<ng-template #elseBlock>
+    <p>No user logged in</p>
+</ng-template>

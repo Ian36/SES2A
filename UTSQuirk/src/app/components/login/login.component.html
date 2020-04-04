@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0">
+            <div class="card-header">
+                <h3 class="mb-0">Login</h3>
+            </div>
+            <div class="card-body">
+                <form (keydown)="keyDownFunction($event)" class="form">
+                    <div class="form-group">
+                        <label for="">Username: </label>
+                        <input [(ngModel)]= "loginUserData.username" name= "username" type="text" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" >Password: </label>
+                        <input [(ngModel)]= "loginUserData.password" name="password" type="password" class="form-control rounded-0" required>
+                    </div>
+                    <button (click)="loginUser()" type="button" class="btn btn-primary float-right">Login</button>
+                </form>
+                <div *ngIf="loginFail != 0">
+                    <div *ngIf="loginFail == 1; else elseBlock">
+                        <p>Login Failed, please try again</p>
+                    </div>
+                    <ng-template #elseBlock>
+                        <p>Login Success, redirecting to home page</p>
+                    </ng-template>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>

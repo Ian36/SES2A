@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "UTSQuirk"
+    }
+  },
+  "defaultProject": "UTSQuirk",
+  "cli": {
+    "analytics": "83b8a2e2-e6a6-419d-9190-452645eceef9"
+  }
 }
