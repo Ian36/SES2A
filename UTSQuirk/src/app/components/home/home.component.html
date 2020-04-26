@@ -1,6 +1,43 @@
-<div *ngIf="user; else elseBlock">
-    <p>User logged in: {{ user }}</p>
+<div class="imgcontainer">
+    <img src="https://scontent.fsyd8-1.fna.fbcdn.net/v/t1.15752-9/94318675_278110343208343_961872326964543488_n.png?_nc_cat=100&_nc_sid=b96e70&_nc_ohc=Yz-B7EIgLQMAX8Ppj2o&_nc_ht=scontent.fsyd8-1.fna&oh=fc7b605110af7588b8b9a7158122214d&oe=5ECACE31"
+        alt="utsquirk_logo">
 </div>
-<ng-template #elseBlock>
-    <p>No user logged in</p>
-</ng-template>
+
+<form *ngIf="!loggedInUser" class="form" (ngSubmit)="login()">
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" [(ngModel)]="username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" [(ngModel)]="password" required>
+
+        <button type="submit">Login</button>
+        <!-- <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label> -->
+        <div *ngIf="incorrectLogin">
+            <div class="alert alert-danger">
+                <strong>Incorrect Username or password!</strong>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div *ngIf="loggedInUser">
+    <h2>{{username}} is logged in</h2>
+    <button (click)=logout() type="submit">Logout</button>
+
+    <div *ngIf="loggedInUser.userType == 'user'">
+        <img class="img"
+            src="https://scontent.fsyd8-1.fna.fbcdn.net/v/t1.15752-9/94582180_676277149631202_5864219728867753984_n.png?_nc_cat=110&_nc_sid=b96e70&_nc_ohc=dWMvt8zOl2UAX_i0ZgN&_nc_ht=scontent.fsyd8-1.fna&oh=8424f1142b70fea84cdd37d87402fa02&oe=5ECA3A0A">
+    </div>
+
+    <div *ngIf="loggedInUser.userType == 'admin'">
+        User List:
+        <li *ngFor="let user of userList">
+            {{ user.username }}
+            {{ user.userType }}
+        </li>
+        <app-add-user-modal></app-add-user-modal>
+    </div>
+</div>

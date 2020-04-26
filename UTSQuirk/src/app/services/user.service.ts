@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/User';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private API = 'http://localhost:3000/api/user/';
+  url = 'http://localhost:3000/user/';
   constructor(private http: HttpClient) { }
 
-  registerUser(user) {
-    return this.http.post<any>(this.API + 'register', user);
+  getUser(user: User): Observable<User> {
+    const endpoint = this.url + 'login';
+    return this.http.post<User>(endpoint, user, httpOptions);
   }
 
-  loginUser(user) {
-    return this.http.post<any>(this.API + 'login', user);
-  }
-
-  loggedIn() {
-    return !!localStorage.getItem('token');
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-  getLoggedInUser() {
-    return this.http.post<any>(this.API + 'token', this.getToken());
+  getUsers(): Observable<any> {
+    const endpoint = this.url;
+    return this.http.get<any>(endpoint, httpOptions);
   }
 }

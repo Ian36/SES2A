@@ -1,0 +1,17 @@
+button {
+    background-color: #0f4beb;
+    color: #fff;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

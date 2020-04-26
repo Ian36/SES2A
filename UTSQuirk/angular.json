@@ -24,6 +24,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +90,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -123,6 +126,6 @@
   },
   "defaultProject": "UTSQuirk",
   "cli": {
-    "analytics": "83b8a2e2-e6a6-419d-9190-452645eceef9"
+    "analytics": "c089dea0-28ea-4947-9109-bf36dc652500"
   }
 }

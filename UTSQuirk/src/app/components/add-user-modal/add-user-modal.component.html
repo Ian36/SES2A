@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add new user</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div>
+                <label for="uname"><b>Username: </b></label>
+                <input type="text" placeholder="Enter Username" name="username" [(ngModel)]="username" required>
+            </div>
+
+            <div>
+                <label for="psw"><b>Password: </b></label>
+                <input type="password" placeholder="Enter Password" name="password" [(ngModel)]="password" required>
+            </div>
+            <div>
+                <label for="userType"><b>UserType: </b></label>
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">Admin</mat-radio-button>
+                    <mat-radio-button value="2">User</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save (not funtional yet)</button>
+    </div>
+</ng-template>
+
+<button (click)="open(content)">Add new user</button>
+
+<hr>

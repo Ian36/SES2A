@@ -1,6 +1,5 @@
-export class User {
-    id: number;
-    userType: string;
+export interface User {
     username: string;
     password: string;
-}
+    userType?: string;
+  }
