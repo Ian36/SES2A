@@ -18,16 +18,20 @@
             </div>
             <div>
                 <label for="userType"><b>UserType: </b></label>
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">Admin</mat-radio-button>
-                    <mat-radio-button value="2">User</mat-radio-button>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="usertype" name="usertype">
+                    <mat-radio-button class="example-radio-button" *ngFor="let usertype of usertypes"
+                        [value]="usertype">
+                        {{usertype}}
+                    </mat-radio-button>
                 </mat-radio-group>
             </div>
 
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save (not funtional yet)</button>
+        <button type="button" class="btn btn-outline-dark"
+            (click)="modal.close('Save click'); registerNewUser()">Save</button>
     </div>
 </ng-template>
 

@@ -5,11 +5,11 @@ import { User } from 'src/app/models/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-add-user-modal',
-  templateUrl: './add-user-modal.component.html',
-  styleUrls: ['./add-user-modal.component.css']
+  selector: 'app-view-user-modal',
+  templateUrl: './view-user-modal.component.html',
+  styleUrls: ['./view-user-modal.component.css']
 })
-export class AddUserModalComponent implements OnInit {
+export class ViewUserModalComponent implements OnInit {
   username: string;
   password: string;
   usertype: string;
@@ -20,7 +20,6 @@ export class AddUserModalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

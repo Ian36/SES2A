@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +10,22 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  columnsToDisplay = ['Username', 'UserType'];
+  name = 'quirk';
+  url = 'https://algassert.com/quirk';
+  urlSafe: SafeResourceUrl;
+
   userList: User[];
   loggedInUser: User;
   username: string;
   password: string;
   incorrectLogin = false;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public sanitizer: DomSanitizer, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.username = 'admin';
-    this.password = 'password';
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    this.username = 'user1';
+    this.password = 'newPassword';
     this.login();
   }
 
@@ -32,8 +40,10 @@ export class HomeComponent implements OnInit {
         this.loggedInUser = returnUser;
         if (this.loggedInUser == null) {
           this.incorrectLogin = true;
+        } else {
+          this.incorrectLogin = false;
         }
-        if(this.loggedInUser.userType === 'admin') {
+        if (this.loggedInUser.userType === 'admin') {
           this.getUserList();
         }
       },
@@ -54,6 +64,7 @@ export class HomeComponent implements OnInit {
         res.users.forEach(user => {
           console.log(user);
           const newUser: User = {
+            userId: user._id,
             username: user.username,
             password: user.password,
             userType: user.userType
@@ -67,5 +78,35 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  getUrl() {
+    // const url = document.getElementById('quirk') as HTMLIFrameElement;
+    // console.log(url.contentWindow.location.href);
+
+    this.snackBar.open('Save currently unavailable!', '', {
+      duration: 2000,
+    });
+  }
+
+  deleteUser(user: User) {
+    if (this.username === user.username) {
+      this.snackBar.open('Cannot delete yourself!', '', {
+        duration: 2000,
+      });
+    } else {
+      this.userService.delete(user).subscribe(
+        res => {
+          console.log(res);
+          this.snackBar.open('User Successfully deleted!', '', {
+            duration: 2000,
+          });
+          this.getUserList();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
 }

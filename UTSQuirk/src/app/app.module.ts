@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,12 +14,14 @@ import { HomeComponent } from './components/home/home.component';
 import { AddUserModalComponent } from './components/add-user-modal/add-user-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewUserModalComponent } from './components/view-user-modal/view-user-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddUserModalComponent
+    AddUserModalComponent,
+    ViewUserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

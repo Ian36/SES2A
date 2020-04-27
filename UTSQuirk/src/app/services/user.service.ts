@@ -23,4 +23,15 @@ export class UserService {
     const endpoint = this.url;
     return this.http.get<any>(endpoint, httpOptions);
   }
+
+  register(user: User): Observable<any> {
+    const endpoint = this.url + 'register';
+    return this.http.post<any>(endpoint, user, httpOptions);
+  }
+
+  delete(user: User): Observable<any> {
+    const endpoint = this.url + user.userId;
+    console.log(endpoint);
+    return this.http.delete<any>(endpoint);
+  }
 }
