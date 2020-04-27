@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,20 @@ export class HomeComponent implements OnInit {
   username: string;
   password: string;
   incorrectLogin = false;
-  constructor(private userService: UserService, public sanitizer: DomSanitizer, private snackBar: MatSnackBar) { }
+  constructor(
+    private userService: UserService,
+    public sanitizer: DomSanitizer,
+    private snackBar: MatSnackBar,
+    private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
+    if (this.eventEmitterService.subsVar === undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.
+      invokeFirstComponentFunction.subscribe((name: string) => {
+        this.getUserList();
+      });
+    }
+
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     this.username = 'user1';
     this.password = 'newPassword';

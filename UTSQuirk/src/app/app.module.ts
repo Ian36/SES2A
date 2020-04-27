@@ -15,6 +15,8 @@ import { AddUserModalComponent } from './components/add-user-modal/add-user-moda
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewUserModalComponent } from './components/view-user-modal/view-user-modal.component';
+import { EventEmitter } from 'protractor';
+import { EventEmitterService } from './services/event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { ViewUserModalComponent } from './components/view-user-modal/view-user-m
     MatTableModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

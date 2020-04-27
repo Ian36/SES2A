@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -16,7 +17,10 @@ export class AddUserModalComponent implements OnInit {
   usertypes: string[] = ['admin', 'user'];
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private userService: UserService, private snackBar: MatSnackBar) { }
+  constructor(private modalService: NgbModal,
+              private userService: UserService,
+              private snackBar: MatSnackBar,
+              private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
   }
@@ -48,6 +52,7 @@ export class AddUserModalComponent implements OnInit {
         this.snackBar.open('User successfully created!', '', {
           duration: 2000,
         });
+        this.eventEmitterService.refreshUserList();
       },
       err => {
         console.log(err);

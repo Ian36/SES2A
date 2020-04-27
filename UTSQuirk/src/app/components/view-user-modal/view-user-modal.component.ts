@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/User';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-view-user-modal',
