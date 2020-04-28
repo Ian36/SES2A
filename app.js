@@ -8,7 +8,6 @@ require('dotenv/config');
 /* app.use('/posts', () => {
     console.log('this is middlware');
 }); */
-
 app.use(cors());
 app.use(bodyParsaer.json());
 

@@ -60,3 +60,7 @@ img {
     float: none;
   }
 }
+
+table {
+  width: 100%;
+}

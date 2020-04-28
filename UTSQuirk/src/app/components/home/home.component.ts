@@ -10,10 +10,10 @@ import { EventEmitterService } from 'src/app/services/event-emitter.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
-  columnsToDisplay = ['Username', 'UserType'];
   name = 'quirk';
-  url = 'https://algassert.com/quirk';
+  url = 'https://algassert.com/quirk#circuit={%22cols%22:[[1,%22%E2%80%A2%22]]}';
   urlSafe: SafeResourceUrl;
 
   userList: User[];
@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
   username: string;
   password: string;
   incorrectLogin = false;
+
+  displayedColumns: string[] = ['id', 'username', 'Type', 'View', 'Delete'];
+
   constructor(
     private userService: UserService,
     public sanitizer: DomSanitizer,
@@ -36,9 +39,6 @@ export class HomeComponent implements OnInit {
     }
 
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
-    this.username = 'user1';
-    this.password = 'newPassword';
-    this.login();
   }
 
   login() {
@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
   }
 
   deleteUser(user: User) {
+
     if (this.username === user.username) {
       this.snackBar.open('Cannot delete yourself!', '', {
         duration: 2000,

@@ -17,13 +17,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewUserModalComponent } from './components/view-user-modal/view-user-modal.component';
 import { EventEmitter } from 'protractor';
 import { EventEmitterService } from './services/event-emitter.service';
+import { ViewCircuitModalComponent } from './components/view-circuit-modal/view-circuit-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AddUserModalComponent,
-    ViewUserModalComponent
+    ViewUserModalComponent,
+    ViewCircuitModalComponent
   ],
   imports: [
     BrowserModule,

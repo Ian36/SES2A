@@ -1,0 +1,27 @@
+button {
+    background-color: #0f4beb;
+    color: #fff;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .app-modal-window .modal-dialog {
+    width: 100%;
+  }
+
+  .modal-body {
+    max-height: none;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    box-sizing: border-box;
+  } 

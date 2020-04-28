@@ -11,9 +11,9 @@ router.get('/', async (req,res) => {
     }
 });
 
-router.get('/:postId', async (req,res) => {
+router.get('/:userId', async (req,res) => {
     try{
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.find({ userId: req.params.userId });
         res.json(post);
     } catch (err) {
         res.json({message: err});
@@ -23,8 +23,9 @@ router.get('/:postId', async (req,res) => {
 
 router.post('/', async (req,res) => {
     const post = new Post({
+        userId: req.body.userId,
         title: req.body.title,
-        description: req.body.description
+        link: req.body.link
     });
     try{
         const savePost = await post.save();
@@ -48,7 +49,7 @@ router.patch('/:postId', async(req,res) => {
     try{
         const updatedPost = await Post.updateOne(
             {_id: req.params.postId },
-            {$set: {title: req.body.title}}
+            {$set: {link: req.body.link}}
         );
         res.json(updatedPost);
     } catch (err) {
