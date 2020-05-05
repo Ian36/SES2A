@@ -29,26 +29,13 @@
 
     <div *ngIf="loggedInUser.userType == 'user'">
         <button (click)=getUrl()>Save</button>
-        <iframe width="100%" height=1000px frameBorder="0" [src]="urlSafe" id="quirk"></iframe>
-    </div>
+            <app-simulator></app-simulator>
+<!--         <iframe width="100%" height=1000px frameBorder="0" [src]="urlSafe" id="quirk"></iframe>
+ -->    </div>
 
     <div *ngIf="loggedInUser.userType == 'admin'">
         User List:
-        <!-- <table>
-            <tr *ngFor="let user of userList">
-                <td>{{ user.username }}</td>
-                <td>{{ user.userType }}</td>
-                <td>
-                    <app-view-user-modal></app-view-user-modal>
-                </td>
-                <td><button mat-raised-button (click)=deleteUser(user)>Delete</button></td>
-            </tr>
-        </table> -->
         <table mat-table [dataSource]="userList" class="mat-elevation-z8">
-
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-          
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id </th>
               <td mat-cell *matCellDef="let element"> {{element.userId}} </td>

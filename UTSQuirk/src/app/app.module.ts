@@ -18,6 +18,7 @@ import { ViewUserModalComponent } from './components/view-user-modal/view-user-m
 import { EventEmitter } from 'protractor';
 import { EventEmitterService } from './services/event-emitter.service';
 import { ViewCircuitModalComponent } from './components/view-circuit-modal/view-circuit-modal.component';
+import { SimulatorComponent } from './components/simulator/simulator.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ViewCircuitModalComponent } from './components/view-circuit-modal/view-
     HomeComponent,
     AddUserModalComponent,
     ViewUserModalComponent,
-    ViewCircuitModalComponent
+    ViewCircuitModalComponent,
+    SimulatorComponent
   ],
   imports: [
     BrowserModule,
