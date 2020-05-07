@@ -1,6 +1,6 @@
 /* Bordered form */
 form {
-  border: 3px solid #f1f1f1;
+  border: 3px solid #000000;
 }
 
 /* Full-width inputs */
@@ -28,6 +28,9 @@ button {
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
+  color: #000000;
+  background-color: #fff;
+  border: 3px solid #0f4beb;
 }
 
 /* Center the avatar image inside this container */

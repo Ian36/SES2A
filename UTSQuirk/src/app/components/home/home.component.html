@@ -5,7 +5,7 @@
 
 <form *ngIf="!loggedInUser" class="form" (ngSubmit)="login()">
     <div class="container">
-        <label for="uname"><b>Username</b></label>
+       <label for="uname"><i>Welcome to UTSQuirk please enter</i><b> Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" [(ngModel)]="username" required>
 
         <label for="psw"><b>Password</b></label>
