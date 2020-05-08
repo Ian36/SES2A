@@ -1,1 +1,28 @@
-<p>simulator works!</p>
+<div class="twoList">
+  <div class="box-list1" cdkDropList #inactiveList="cdkDropList" id = "Inactive Customers"
+    [cdkDropListData]="inactiveCustomers" [cdkDropListConnectedTo]="[activeList]"
+    (cdkDropListDropped)="drop1($event)"
+    (cdkDropListEntered)="dropListEntered($event)" (cdkDropListExited)="dropListExited($event)"
+    [cdkDropListEnterPredicate]="predicate"
+    >
+    <div class="drag-box  dragList" [cdkDragData]="customer"
+    (cdkDragEntered)="dragEntered($event)" (cdkDragExited)="dragExited($event)"
+      *ngFor="let customer of inactiveCustomers;isLast as last" 
+      cdkDrag>
+      {{customer.name}}
+    </div>
+  </div>
+  <div class="box-list2" cdkDropList #activeList="cdkDropList" id = "Active Customers"
+    [cdkDropListData]="activeCustomers" [cdkDropListConnectedTo]="[inactiveList]"
+    (cdkDropListDropped)="drop1($event)" [cdkDropListEnterPredicate]="predicate"
+    (cdkDropListSorted)="dropListSorted($event)"
+    >
+    <div
+      class="drag-box  dragList"
+      [cdkDragData]="customer"
+      *ngFor="let customer of activeCustomers" 
+      cdkDrag>
+      {{customer.name}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.drag-box{
+    height: 100px;
+    width: 28px;
+    border: 1px solid #000;
+}
+.box-handler{
+    width: 100%;
+    height: 20px;
+    background: #ccc;
+}
+.dragList{
+    height: 28px;
+    margin: 5px 0;
+}
+.dragListH{
+    display: inline-block;
+    margin: 0 5px;
+    height: 28px;
+    width: 55px;
+}
+
+.cdk-drag-animating {
+    transition: transform 300ms ease;
+}
+.defplaceh .cdk-drag-placeholder {
+    background: #ccc;
+    border: dotted 1px #999;
+    transition: transform 500ms ease;
+}
+
+
+
+.cdk-drag-preview {
+    height: 28px;
+    width: 28px;
+    box-shadow: 0 3px 3px -3px #0084ff;
+}
+
+
+.twoList {
+    overflow: hidden;
+}
+
+.twoList{
+    overflow: hidden;
+}
