@@ -1,6 +1,6 @@
 /* Bordered form */
 form {
-  border: 3px solid #f1f1f1;
+  border: 3px solid #000000;
 }
 
 /* Full-width inputs */
@@ -16,18 +16,43 @@ input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #0f4beb;
+  /*background-color: #0f4beb;
   color: #fff;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
+  border-radius: 12px;*/
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0f4beb;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
 }
 
 /* Add a hover effect for buttons */
 button:hover {
-  opacity: 0.8;
+  /*opacity: 0.8;
+  color: #000000;
+  background-color: #fff;
+  border: 3px solid #0f4beb;*/
+
+  background-color: #270479
+
+}
+
+.button:active {
+  background-color: #270479;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 /* Center the avatar image inside this container */
@@ -63,4 +88,8 @@ img {
 
 table {
   width: 100%;
+}
+
+label{
+
 }
