@@ -19,6 +19,9 @@ import { EventEmitter } from 'protractor';
 import { EventEmitterService } from './services/event-emitter.service';
 import { ViewCircuitModalComponent } from './components/view-circuit-modal/view-circuit-modal.component';
 import { SimulatorComponent } from './components/simulator/simulator.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { SimulatorComponent } from './components/simulator/simulator.component';
     BrowserAnimationsModule,
     MatRadioModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatProgressBarModule
   ],
   providers: [EventEmitterService],
   bootstrap: [AppComponent]

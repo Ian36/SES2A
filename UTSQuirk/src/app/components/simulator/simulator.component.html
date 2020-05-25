@@ -1,4 +1,4 @@
-<div class="twoList">
+<!-- <div class="twoList">
   <div class="box-list1" cdkDropList #inactiveList="cdkDropList" id = "Inactive Customers"
     [cdkDropListData]="inactiveCustomers" [cdkDropListConnectedTo]="[activeList]"
     (cdkDropListDropped)="drop1($event)"
@@ -25,4 +25,101 @@
       {{customer.name}}
     </div>
   </div>
-</div>
+</div> -->
+
+<table style="height: 100px;" width="500">
+  <tbody>
+  <tr>
+  <td style="width: 100px;">Initial state</td>
+  <td style="width: 100px;">Coloumn 1</td>
+  <td style="width: 100px;">Coloumn 2</td>
+  <td style="width: 100px;">Coloumn 3</td>
+  <td style="width: 100px;">Histogram</td>
+  <td style="width: 100px;">Probability</td>
+  </tr>
+  <tr>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select  [(ngModel)]="selectedInitalState[0]" (ngModelChange)="changeInitialState(0)">
+        <mat-option *ngFor="let state of initalStates" [value]="state">
+          {{state}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[0]" (ngModelChange)="addGate(0, 0, 0)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[1]" (ngModelChange)="addGate(1, 1, 0)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[2]" (ngModelChange)="addGate(2, 2, 0)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+    <td style="width: 100px;">
+      <mat-progress-bar mode="determinate" value="{{probability[0] * 100}}"></mat-progress-bar>
+    </td>
+  <td style="width: 100px; ">      {{ probability[0] }}</td>
+  </tr>
+  <tr>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedInitalState[1]" (ngModelChange)="changeInitialState(1)">
+        <mat-option *ngFor="let state of initalStates" [value]="state">
+          {{state}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[3]" (ngModelChange)="addGate(3, 0, 1)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[4]" (ngModelChange)="addGate(4, 1, 1)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+  <td style="width: 100px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedValue[5]" (ngModelChange)="addGate(5, 2, 1)">
+        <mat-option *ngFor="let gate of gates" [value]="gate">
+          {{gate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </td>
+    <td style="width: 100px;">
+      <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
+    </td>
+  <td style="width: 100px;">      {{ probability[1] }}</td>
+  </tr>
+  </tbody>
+  </table>

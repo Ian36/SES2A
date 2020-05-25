@@ -53,10 +53,10 @@ export class HomeComponent implements OnInit {
         if (this.loggedInUser == null) {
           this.incorrectLogin = true;
         } else {
+          if (this.loggedInUser.userType === 'admin') {
+            this.getUserList();
+          }
           this.incorrectLogin = false;
-        }
-        if (this.loggedInUser.userType === 'admin') {
-          this.getUserList();
         }
       },
       err => {

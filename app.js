@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParsaer = require('body-parser');
 const cors  = require('cors');
+
 require('dotenv/config');
 
 /* app.use('/posts', () => {
@@ -17,10 +18,12 @@ app.use('/posts', postsRoute);
 const userRoute = require('./routes/users');
 app.use('/user', userRoute);
 
+const circuitRoute = require('./routes/circuit');
+app.use('/circuit', circuitRoute);
+
 app.get('/', (req,res) => {
     res.send('We are on home');
 });
-
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => 
     console.log('Connected to DB')

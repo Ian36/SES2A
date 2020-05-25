@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragEnd, CdkDragStart, CdkDragMove,
   CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray,
   transferArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { SimulatorService } from 'src/app/services/simulator.service';
+import { AddGate } from 'src/app/models/AddGate';
+
 
 @Component({
   selector: 'app-simulator',
@@ -9,6 +12,12 @@ import { CdkDragEnd, CdkDragStart, CdkDragMove,
   styleUrls: ['./simulator.component.css']
 })
 export class SimulatorComponent implements OnInit {
+  probability: number[] = [0, 0];
+  initalStates: string[] = ['|0>', '|1>'];
+  selectedInitalState: string[] = ['|0>', '|0>'];
+  selectedValue: string[] = [' ', ' ', ' ', ' ', ' ', ' '];
+  gates: string[] = [' ', 'x', 'y', 'z', 'h', 'swap'];
+
   state = '';
   position = '';
   customers = [
@@ -28,10 +37,62 @@ export class SimulatorComponent implements OnInit {
     {name: 'H', age: 10},
     {name: 'H', age: 24}
   ];
-  constructor() { }
+  constructor(private simulatorService: SimulatorService) { }
 
   ngOnInit(): void {
+    this.resetCircuit();
+    this.resetCircuit();
+    this.getProbability();
   }
+
+  resetCircuit() {
+    this.simulatorService.reset().subscribe(
+      res => {
+        console.log(res);
+        this.selectedInitalState = ['|0>', '|0>'];
+        this.selectedValue = [' ', ' ', ' ', ' ', ' ', ' '];
+      },
+      err => {
+        console.log('error: ' + err);
+      }
+    );
+  }
+
+  changeInitialState(state: number) {
+    console.log('changeInitialState to ' + this.selectedInitalState[state]);
+    this.getProbability();
+  }
+
+  addGate(gate: number, inColumn: number, inWire: number) {
+    console.log('Adding ' + this.selectedValue[gate] + ' to column ' + inColumn + ', wire ' + inWire);
+    const newGate: AddGate = {
+      gate: this.selectedValue[gate],
+      column: inColumn,
+      wire: inWire
+    };
+    this.simulatorService.addGate(newGate).subscribe(
+      res => {
+        console.log('success: ' + res);
+        this.getProbability();
+      }, err => {
+        console.log('error: ' + err);
+      }
+    );
+  }
+
+  getProbability() {
+    const states = [+(this.selectedInitalState[0].substring(1, 2)), +(this.selectedInitalState[1].substring(1, 2))];
+    this.simulatorService.getProbability(states).subscribe(
+      res => {
+        console.log(res);
+        this.probability = res;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   dragStarted(event: CdkDragStart) {
     this.state = 'start dragging';
     console.log('start dragging');
@@ -60,21 +121,20 @@ export class SimulatorComponent implements OnInit {
   }
 
   dropListExited(event: CdkDragExit) {
-    
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    
+
     moveItemInArray(this.customers, event.previousIndex, event.currentIndex);
   }
 
   drop1(event: CdkDragDrop<string[]>) {
-    
+
     if (event.previousContainer === event.container) {
-      
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      
+
       transferArrayItem(
         event.previousContainer.data, event.container.data,
         event.previousIndex, event.currentIndex);
@@ -89,5 +149,5 @@ export class SimulatorComponent implements OnInit {
   dropListSorted(event: CdkDropList) {
     console.log('Sorted:', event);
   }
-
 }
+
