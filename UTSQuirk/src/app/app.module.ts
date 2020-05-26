@@ -22,6 +22,8 @@ import { SimulatorComponent } from './components/simulator/simulator.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SaveCircuitModalComponent } from './components/save-circuit-modal/save-circuit-modal.component';
+import { CircuitListModalComponent } from './components/circuit-list-modal/circuit-list-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AddUserModalComponent,
     ViewUserModalComponent,
     ViewCircuitModalComponent,
-    SimulatorComponent
+    SimulatorComponent,
+    SaveCircuitModalComponent,
+    CircuitListModalComponent
   ],
   imports: [
     DragDropModule,

@@ -1,0 +1,36 @@
+button {
+    /* background-color: #0f4beb;
+     color: #fff;
+     padding: 14px 20px;
+     margin: 8px 0;
+     border: none;
+     cursor: pointer;
+     width: auto;
+   */
+     display: inline-block;
+     padding: 6px 16px;
+     font-size: 16px;
+     cursor: pointer;
+     text-align: center;
+     text-decoration: none;
+     outline: none;
+     color: #fff;
+     background-color: #0f4beb;
+     border: none;
+     border-radius: 10px;
+     box-shadow: 0 4px #999;
+   }
+   
+   button:hover {
+     opacity: 0.8;
+   }
+   
+   .button:active {
+     background-color: #270479;
+     box-shadow: 0 1px rgb(219, 217, 217);
+     transform: translateY(2px);
+   }
+   
+   .mat-radio-button~.mat-radio-button {
+     margin-left: 16px;
+   }

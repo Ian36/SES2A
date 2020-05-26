@@ -1,31 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const quantumCircuit = require("quantum-circuit");
+const CircuitFile = require('../models/CircuitFile');
 
 var circuit = new quantumCircuit(2);
-
-router.get('/', async (req,res) => { 
-    for(var i = 0; i < 8; i++) {
-        //
-        // add Hadamard gate to the end (-1) of i-th wire
-        //
-        circuit.addGate("h", -1, i);
- 
-        //
-        // add measurement gate to i-th qubit which will store result 
-        // into classical register "c", into i-th classical bit
-        //
-        circuit.addMeasure(i, "c", i); 
-    }
- 
-    // run circuit
-    circuit.run();
- 
-    // log value of register "c"
-    const result = circuit.getCregValue("c");
-    console.log(result);
-    res.status(200).send(result.toString());
-});
 
 router.post('/addGate', async (req,res) => {
     console.log('adding gate');
@@ -95,4 +73,60 @@ router.get('/measurement', async (req,res) => {
     res.status(200).send(circuit.measureAll());
 });
 
+router.post('/save/:fileName', async (req,res) => {
+    console.log('Saving circuit');
+    console.log(req.params.fileName);
+    var file = circuit.save();
+    const circuitFile = new CircuitFile({
+        fileName: req.params.fileName,
+        circuit: file
+    });
+    try{
+        const newCircuitFile = await circuitFile.save();
+        res.json(newCircuitFile);
+    } catch (err) {
+        res.json({message: err});
+    }
+});
+
+router.get('/circuitList', async (req,res) => {
+    console.log('Getting circuits');
+    try{
+        const circuits = await CircuitFile.find();
+        res.json({circuits});
+    }catch(err){
+        res.json({messsage:err});
+    }
+});
+
+router.post('/load', async (req,res) => {
+    console.log('Loading circuit');
+    console.log(req.body.name);
+    
+    try{
+        const loadedCircuit = await CircuitFile.findOne(
+            {
+                fileName: req.body.name
+            }
+        );
+        circuit.load(loadedCircuit.circuit);
+        
+        circuit.run();
+        console.log(circuit.stateAsString(false));
+        console.log('loaded circuit probability: ' + circuit.probabilities());
+        res.json('success');
+    } catch (err) {
+        res.json({message: err});
+    }
+});
+
+router.get('/getCircuits', async (req,res) => {
+    console.log('Getting circuits');
+    try{
+        const circuits = await CircuitFile.find();
+        res.json({circuits});
+    }catch(err){
+        res.json({messsage:err});
+    }
+})
 module.exports = router;

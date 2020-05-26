@@ -28,8 +28,10 @@
   <button (click)=logout() type="submit">Logout</button>
 
   <div *ngIf="loggedInUser.userType == 'user'">
-    <button (click)=getUrl()>Save</button>
 
+<div>
+  <app-simulator></app-simulator>
+</div>
 
     <!--         <iframe width="100%" height=1000px frameBorder="0" [src]="urlSafe" id="quirk"></iframe>
  -->
@@ -72,7 +74,4 @@
 
     <app-add-user-modal></app-add-user-modal>
   </div>
-</div>
-<div>
-  <app-simulator></app-simulator>
 </div>
