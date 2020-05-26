@@ -14,7 +14,8 @@ Firstly, clone this Git repository and install NodeJS.
 
 Angular can be installed via the command line with:
 
-npm install -g @angular/cli
+npm install -g @angular/cli\
+npm install --save-dev @angular-devkit/build-angular
 
 To start the angular components, run:
 
