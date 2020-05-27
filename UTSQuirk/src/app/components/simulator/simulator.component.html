@@ -135,6 +135,7 @@
     #todoList="cdkDropList"
     [cdkDropListData]="todo"
     [cdkDropListConnectedTo]="[doneList]"
+    id = "contaner1"
     class="quantum-options"
     (cdkDropListDropped)="dropit($event)">
    <div class="options" *ngFor="let item of todo" cdkDrag>{{item}}</div>
@@ -147,6 +148,7 @@
     #doneList="cdkDropList"
     [cdkDropListData]="done"
     [cdkDropListConnectedTo]="[todoList]"
+    id = "contaner2"
     (cdkDropListDropped)="dropit($event)"> 
       <div class="line" *ngFor="let item of done" cdkDrag>{{item}}</div>
     <td style="width: 100px;">
@@ -156,4 +158,17 @@
     </td>
      <td style="width: 100px;">      {{ probability[1] }}</td>
       </div>
+  </div>
+
+   <div class="quantum-options">
+   <h2>Trash</h2>
+   <div cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="trash"
+    [cdkDropListConnectedTo]="[trashList]"
+    id = "contaner3"
+    class="quantum-options"
+    (cdkDropListDropped)="dropit($event)">
+   <div class="options" *ngFor="let item of trash" cdkDrag>{{item}}</div>
+   </div>
   </div>

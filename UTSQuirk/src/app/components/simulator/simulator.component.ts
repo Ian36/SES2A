@@ -162,15 +162,26 @@ export class SimulatorComponent implements OnInit {
     
   ];
 
+  trash = [];
+
   dropit(event: CdkDragDrop<string[]>) {
+    event.container.id
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      if( event.container.id=="contaner2"){
       copyArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
+                      }
 
+       if( event.container.id=="contaner3"){
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+                                        }                
                         
     }
   }
