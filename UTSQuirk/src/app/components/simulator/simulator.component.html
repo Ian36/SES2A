@@ -165,7 +165,7 @@
    <div cdkDropList
     #todoList="cdkDropList"
     [cdkDropListData]="trash"
-    [cdkDropListConnectedTo]="[trashList]"
+    [cdkDropListConnectedTo]="[todoList]"
     id = "contaner3"
     class="quantum-options"
     (cdkDropListDropped)="dropit($event)">
