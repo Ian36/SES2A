@@ -165,7 +165,7 @@ export class SimulatorComponent implements OnInit {
   trash = [];
 
   dropit(event: CdkDragDrop<string[]>) {
-    event.container.id
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -181,9 +181,14 @@ export class SimulatorComponent implements OnInit {
           event.container.data,
           event.previousIndex,
           event.currentIndex);
+       
                                         }                
                         
     }
+
+    this.trash.length = 0;
+
+
   }
 }
 
