@@ -83,7 +83,7 @@ router.post('/save/:fileName', async (req,res) => {
         
     });
     try{
-        console.log('Circuit.js ');
+        console.log('Circuit.js new save 3');
         console.log(req.params.fileName);
         console.log(req.query.username);
         const newCircuitFile = await circuitFile.save();
