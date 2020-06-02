@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AddGate } from '../models/AddGate';
 import { CircuitFile } from '../models/CircuitFile';
 import { CircuitFileList } from '../models/CircuitFileList';
+import { User } from 'src/app/models/User';
 
 
 const httpOptions = {
@@ -15,6 +16,7 @@ const httpOptions = {
 })
 export class SimulatorService {
 
+  // loggedInUser = User;
   url = 'http://localhost:3000/circuit/';
 
   constructor(private http: HttpClient) { }
@@ -35,8 +37,12 @@ export class SimulatorService {
     return this.http.get<string>(endpoint);
   }
 
-  saveCircuit(name: string): Observable<string> {
-    const endpoint = this.url + 'save/' + name;
+  saveCircuit(name: string, username: string): Observable<string> {
+    const endpoint = this.url + 'save/' + name + "?username="+ username;
+    console.log("Saving Circuit -- simulator service");
+    console.log(username);
+    console.log(name);
+    
     return this.http.post<string>(endpoint, name);
   }
 

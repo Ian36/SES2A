@@ -74,14 +74,18 @@ router.get('/measurement', async (req,res) => {
 });
 
 router.post('/save/:fileName', async (req,res) => {
-    console.log('Saving circuit');
-    console.log(req.params.fileName);
+  
     var file = circuit.save();
     const circuitFile = new CircuitFile({
         fileName: req.params.fileName,
+        username: req.query.username,
         circuit: file
+        
     });
     try{
+        console.log('Circuit.js ');
+        console.log(req.params.fileName);
+        console.log(req.query.username);
         const newCircuitFile = await circuitFile.save();
         res.json(newCircuitFile);
     } catch (err) {
