@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SaveCircuitModalComponent } from './components/save-circuit-modal/save-circuit-modal.component';
 import { CircuitListModalComponent } from './components/circuit-list-modal/circuit-list-modal.component';
+import { AddTaskModalComponent } from './components/add-task-modal/add-task-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CircuitListModalComponent } from './components/circuit-list-modal/circu
     ViewCircuitModalComponent,
     SimulatorComponent,
     SaveCircuitModalComponent,
-    CircuitListModalComponent
+    CircuitListModalComponent,
+    AddTaskModalComponent
   ],
   imports: [
     DragDropModule,
