@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragEnd, CdkDragStart, CdkDragMove,
   CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray,
-  transferArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+  transferArrayItem, CdkDrag, CdkDropList, copyArrayItem } from '@angular/cdk/drag-drop';
 import { SimulatorService } from 'src/app/services/simulator.service';
 import { AddGate } from 'src/app/models/AddGate';
 
@@ -150,5 +150,47 @@ export class SimulatorComponent implements OnInit {
   dropListSorted(event: CdkDropList) {
     console.log('Sorted:', event);
   }
+
+
+  todo = [
+    'x',
+    'y',
+    'z',
+    'c'
+  ];
+
+  done = [
+    
+  ];
+
+  trash = [];
+
+  dropit(event: CdkDragDrop<string[]>) {
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      if( event.container.id=="contaner2"){
+      copyArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                      }
+
+       if( event.container.id=="contaner3"){
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+       
+                                        }                
+                        
+    }
+
+    this.trash.length = 0;
+
+
+  }
 }
+
 
