@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -33,9 +34,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (this.eventEmitterService.subsVar === undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.
-      invokeFirstComponentFunction.subscribe((name: string) => {
-        this.getUserList();
-      });
+        invokeFirstComponentFunction.subscribe((name: string) => {
+          this.getUserList();
+        });
     }
 
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
