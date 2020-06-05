@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'UTSQuirk';
+  title = 'UTS Quantum Circuit Simulator';
 }

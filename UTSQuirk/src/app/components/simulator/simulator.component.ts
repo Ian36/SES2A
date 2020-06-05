@@ -16,7 +16,7 @@ export class SimulatorComponent implements OnInit {
   initalStates: string[] = ['|0>', '|1>'];
   selectedInitalState: string[] = ['|0>', '|0>'];
   selectedValue: string[] = [' ', ' ', ' ', ' ', ' ', ' '];
-  gates: string[] = [' ', 'x', 'y', 'z', 'h', 'swap'];
+  gates: string[] = [' ', 'x', 'y', 'z', 'h', 's', 't', 'cx', 'cz', 'swap', 'ccx'];
 
   state = '';
   position = '';
@@ -79,6 +79,7 @@ export class SimulatorComponent implements OnInit {
       }
     );
   }
+
 
   getProbability() {
     const states = [+(this.selectedInitalState[0].substring(1, 2)), +(this.selectedInitalState[1].substring(1, 2))];

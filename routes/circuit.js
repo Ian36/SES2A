@@ -64,6 +64,8 @@ router.post('/probability', async (req,res) => {
     }
     console.log('Getting probability');
     console.log(circuit.probabilities());
+    console.log(circuit.stateAsString(false));
+
     res.status(200).send(circuit.probabilities());
 });
 

@@ -77,7 +77,7 @@
     <td style="width: 100px;">
       <mat-progress-bar mode="determinate" value="{{probability[0] * 100}}"></mat-progress-bar>
     </td>
-  <td style="width: 100px; ">      {{ probability[0] }}</td>
+  <td style="width: 100px; ">      {{ probability[0]}}</td>
   </tr>
   <tr>
   <td style="width: 100px;">
@@ -126,6 +126,10 @@
 
   <app-save-circuit-modal></app-save-circuit-modal>
   <app-circuit-list-modal></app-circuit-list-modal>
+  
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
 
 
 <div class="coloumn-options"> 
@@ -140,7 +144,7 @@
     <td style="width: 100px;">
       <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
     </td>
-  <td style="width: 100px;">      {{ probability[1] }}</td>
+  <td style="width: 100px;">      {{ probability[0] * 100 }}</td>
   </div>
   <div class="line-options"> 
     <div class="line"></div>
@@ -149,7 +153,7 @@
     <td style="width: 100px;">
       <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
     </td>
-  <td style="width: 100px;">      {{ probability[1] }}</td>
+  <td style="width: 100px;">      {{ probability[1] * 100 }}</td>
   </div>
   <div class="quantum-options">
     <div class="options">X</div>
