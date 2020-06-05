@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AddGate } from '../models/AddGate';
 import { CircuitFile } from '../models/CircuitFile';
 import { CircuitFileList } from '../models/CircuitFileList';
+import { User } from 'src/app/models/User';
 
 
 const httpOptions = {
@@ -15,6 +16,7 @@ const httpOptions = {
 })
 export class SimulatorService {
 
+  // loggedInUser = User;
   url = 'http://localhost:3000/circuit/';
 
   constructor(private http: HttpClient) { }
@@ -35,18 +37,21 @@ export class SimulatorService {
     return this.http.get<string>(endpoint);
   }
 
-  saveCircuit(name: string): Observable<string> {
-    const endpoint = this.url + 'save/' + name;
+  saveCircuit(name: string, username: string): Observable<string> {
+    const endpoint = this.url + 'save/' + name + "?username="+ username;
+  
+    
     return this.http.post<string>(endpoint, name);
   }
 
-  getCircuits(): Observable<CircuitFileList> {
-    const endpoint = this.url + 'getCircuits';
+  getCircuits(username: string): Observable<CircuitFileList> {
+    const endpoint = this.url + 'getCircuits/'+ "?username=" + username;
     return this.http.get<CircuitFileList>(endpoint);
   }
 
-  loadCircuit(id: string): Observable<string> {
-    const endpoint = this.url + 'loadCircuit' + id;
+  loadCircuit(fileName: string, username: string): Observable<string> {
+    console.log("reached simulator service.ts load circuit");
+    const endpoint = this.url + 'load/' +"?fileName=" + fileName + "&username="+ username;
     return this.http.get<string>(endpoint);
   }
 }

@@ -15,6 +15,8 @@ import { CircuitFile } from 'src/app/models/CircuitFile';
   styleUrls: ['./circuit-list-modal.component.css']
 })
 export class CircuitListModalComponent implements OnInit {
+  @Input() message;
+  loggedInUser :User;
   circuits: CircuitFile[];
   closeResult = '';
   displayedColumns: string[] = ['fileName', 'view'];
@@ -29,6 +31,7 @@ export class CircuitListModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loggedInUser = this.message;
     this.loadCircuits();
   }
 
@@ -51,7 +54,7 @@ export class CircuitListModalComponent implements OnInit {
   }
 
   loadCircuits() {
-    this.simulatorService.getCircuits().subscribe(
+    this.simulatorService.getCircuits(this.loggedInUser.username).subscribe(
       res => {
         console.log(res.circuits);
         this.circuits = res.circuits;
@@ -60,7 +63,11 @@ export class CircuitListModalComponent implements OnInit {
   }
 
   loadSelectedCircuit(circuit: CircuitFile) {
-    this.simulatorService.loadCircuit(circuit.id).subscribe(
+    console.log("Reachhed cls.ts");
+    console.log(circuit);
+    console.log(circuit.fileName);
+ 
+    this.simulatorService.loadCircuit(circuit.fileName, this.loggedInUser.username).subscribe(
       res => {
         console.log(res);
       }

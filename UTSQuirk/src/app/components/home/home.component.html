@@ -42,9 +42,10 @@
 
   <div *ngIf="loggedInUser.userType == 'user'" class="card-holder">
 
-    <div>
-      <app-simulator></app-simulator>
-    </div>
+<div>
+  <app-simulator [message] = "loggedInUser"></app-simulator>
+</div>
+
 
     <!--         <iframe width="100%" height=1000px frameBorder="0" [src]="urlSafe" id="quirk"></iframe>
  -->

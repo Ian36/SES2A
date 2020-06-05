@@ -74,14 +74,18 @@ router.get('/measurement', async (req,res) => {
 });
 
 router.post('/save/:fileName', async (req,res) => {
-    console.log('Saving circuit');
-    console.log(req.params.fileName);
+  
     var file = circuit.save();
     const circuitFile = new CircuitFile({
         fileName: req.params.fileName,
+        username: req.query.username,
         circuit: file
+        
     });
     try{
+        console.log('Circuit.js new save 3');
+        console.log(req.params.fileName);
+        console.log(req.query.username);
         const newCircuitFile = await circuitFile.save();
         res.json(newCircuitFile);
     } catch (err) {
@@ -99,14 +103,16 @@ router.get('/circuitList', async (req,res) => {
     }
 });
 
-router.post('/load', async (req,res) => {
-    console.log('Loading circuit');
-    console.log(req.body.name);
+router.get('/load', async (req,res) => {
+    console.log("Load 6");
+    console.log(req.query.fileName);
+    console.log(req.query.username);
     
     try{
         const loadedCircuit = await CircuitFile.findOne(
             {
-                fileName: req.body.name
+                fileName: req.query.fileName,
+                username: req.query.username
             }
         );
         circuit.load(loadedCircuit.circuit);
@@ -121,9 +127,12 @@ router.post('/load', async (req,res) => {
 });
 
 router.get('/getCircuits', async (req,res) => {
-    console.log('Getting circuits');
+    // console.log('Getting circuits');
+    console.log("Gettting circuits for ", req.query.username);
     try{
-        const circuits = await CircuitFile.find();
+        const circuits = await CircuitFile.find(
+            { username: req.query.username}
+        );
         res.json({circuits});
     }catch(err){
         res.json({messsage:err});
