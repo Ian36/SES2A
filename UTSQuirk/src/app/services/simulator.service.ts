@@ -39,20 +39,19 @@ export class SimulatorService {
 
   saveCircuit(name: string, username: string): Observable<string> {
     const endpoint = this.url + 'save/' + name + "?username="+ username;
-    console.log("Saving Circuit -- simulator service");
-    console.log(username);
-    console.log(name);
+  
     
     return this.http.post<string>(endpoint, name);
   }
 
-  getCircuits(): Observable<CircuitFileList> {
-    const endpoint = this.url + 'getCircuits';
+  getCircuits(username: string): Observable<CircuitFileList> {
+    const endpoint = this.url + 'getCircuits/'+ "?username=" + username;
     return this.http.get<CircuitFileList>(endpoint);
   }
 
-  loadCircuit(id: string): Observable<string> {
-    const endpoint = this.url + 'loadCircuit' + id;
+  loadCircuit(fileName: string, username: string): Observable<string> {
+    console.log("reached simulator service.ts load circuit");
+    const endpoint = this.url + 'load/' +"?fileName=" + fileName + "&username="+ username;
     return this.http.get<string>(endpoint);
   }
 }
