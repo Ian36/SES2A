@@ -24,5 +24,8 @@
     "mongoose": "^5.9.10",
     "nodemon": "^2.0.3",
     "quantum-circuit": "^0.9.152"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.901.7"
   }
 }

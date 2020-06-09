@@ -1,77 +1,94 @@
-<div class="imgcontainer">
-  <h1>UTS Quantum Circuit Simulator</h1>
-</div>
+<!-- LOGIN FORM!!!!! -->
+<form *ngIf="!loggedInUser" (ngSubmit)="login()">
+  <div class="card-holder">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <p>
+          <mat-form-field>
+            <mat-label><b> Username</b></mat-label>
+            <input matInput type="text" placeholder="Enter Username" name="username" [(ngModel)]="username" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <mat-label><b>Password</b></mat-label>
+            <input matInput type="password" placeholder="Enter Password" name="password" [(ngModel)]="password"
+              required>
+          </mat-form-field>
+        </p>
 
-<form *ngIf="!loggedInUser" class="form" (ngSubmit)="login()">
-  <div class="container">
-    <h2>Welcome to UTS Quantum Circuit Simulator!</h2>
-    <label for="uname"><b> Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" [(ngModel)]="username" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" [(ngModel)]="password" required>
-
-    <button type="submit">Login</button>
-    <!-- <label>
+        <!-- <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
         </label> -->
-    <div *ngIf="incorrectLogin">
-      <div class="alert alert-danger">
-        <strong>Incorrect Username or password!</strong>
-      </div>
-    </div>
+        <div *ngIf="incorrectLogin">
+          <div class="alert alert-danger">
+            <strong>Incorrect Username or password!</strong>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="submit">Login</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </form>
-
+<!-- USER IS LOGGED IN -->
 <div *ngIf="loggedInUser">
-  <h2>{{username}} is logged in</h2>
-  <button (click)=logout() type="submit">Logout</button>
+  <mat-toolbar>
+    <span>{{username}} is logged in.</span>
+    <span class="example-spacer"></span>
+    <span><button mat-raised-button color="primary" (click)=logout() type="submit">Logout</button></span>
+  </mat-toolbar>
 
-  <div *ngIf="loggedInUser.userType == 'user'">
+  <div *ngIf="loggedInUser.userType == 'user'" class="card-holder">
 
 <div>
-  <app-simulator></app-simulator>
+  <app-simulator [message] = "loggedInUser"></app-simulator>
 </div>
+
 
     <!--         <iframe width="100%" height=1000px frameBorder="0" [src]="urlSafe" id="quirk"></iframe>
  -->
   </div>
 
-  <div *ngIf="loggedInUser.userType == 'admin'">
-    User List:
-    <table mat-table [dataSource]="userList" class="mat-elevation-z8">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
-      </ng-container>
+  <div *ngIf="loggedInUser.userType == 'admin'" class="card-holder">
+    <div>
+      <h1>User List:</h1><br>
+      <table mat-table [dataSource]="userList" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-      </ng-container>
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Username </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="Type">
-        <th mat-header-cell *matHeaderCellDef> User Type </th>
-        <td mat-cell *matCellDef="let element"> {{element.userType}} </td>
-      </ng-container>
+        <ng-container matColumnDef="Type">
+          <th mat-header-cell *matHeaderCellDef> User Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.userType}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="View">
-        <th mat-header-cell *matHeaderCellDef> View</th>
-        <td mat-cell *matCellDef="let element">
-          <app-view-user-modal [message]="element"></app-view-user-modal>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="Delete">
-        <th mat-header-cell *matHeaderCellDef> Delete </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button (click)=deleteUser(element)>Delete</button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="View">
+          <th mat-header-cell *matHeaderCellDef> View</th>
+          <td mat-cell *matCellDef="let element">
+            <app-view-user-modal [message]="element"></app-view-user-modal>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button color="secondary" (click)=deleteUser(element)>Delete</button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-    <app-add-user-modal></app-add-user-modal>
+      <br><br>
+      <app-add-user-modal></app-add-user-modal>
+    </div>
   </div>
 </div>

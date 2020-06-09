@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { SimulatorService } from 'src/app/services/simulator.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-save-circuit-modal',
@@ -11,7 +12,8 @@ import { SimulatorService } from 'src/app/services/simulator.service';
   styleUrls: ['./save-circuit-modal.component.css']
 })
 export class SaveCircuitModalComponent implements OnInit {
-
+  @Input() message;
+  loggedInUser :User;
   fileName: string;
   closeResult = '';
 
@@ -22,6 +24,7 @@ export class SaveCircuitModalComponent implements OnInit {
               private simulatorService: SimulatorService) { }
 
   ngOnInit(): void {
+    this.loggedInUser = this.message;
   }
 
   open(content) {
@@ -43,9 +46,11 @@ export class SaveCircuitModalComponent implements OnInit {
   }
 
   save() {
-    this.simulatorService.saveCircuit(this.fileName).subscribe(
+    this.simulatorService.saveCircuit(this.fileName, this.loggedInUser.username).subscribe(
       res => {
         console.log(res);
+        console.log(this.fileName);
+        console.log(this.loggedInUser.username);
         this.snackBar.open(this.fileName + ' successfully saved!', '', {
           duration: 2000,
         });

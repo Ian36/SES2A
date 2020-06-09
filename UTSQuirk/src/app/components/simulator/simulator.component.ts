@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  CdkDragEnd, CdkDragStart, CdkDragMove,
+import { Component, OnInit, Input } from '@angular/core';
+import { CdkDragEnd, CdkDragStart, CdkDragMove,
   CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray,
   transferArrayItem, CdkDrag, CdkDropList, copyArrayItem
 } from '@angular/cdk/drag-drop';
 import { SimulatorService } from 'src/app/services/simulator.service';
 import { AddGate } from 'src/app/models/AddGate';
+import { User } from 'src/app/models/User';
 
 
 @Component({
@@ -19,6 +19,8 @@ export class SimulatorComponent implements OnInit {
   trash = [];
   dragPosition = {x: 0, y: 0};
 
+  @Input() message;
+  loggedInUser: User;
   probability: number[] = [0, 0];
   initalStates: string[] = ['|0>', '|1>'];
   selectedInitalState: string[] = ['|0>', '|0>'];
@@ -50,6 +52,9 @@ export class SimulatorComponent implements OnInit {
     this.resetCircuit();
     this.resetCircuit();
     this.getProbability();
+    this.loggedInUser = this.message;
+    console.log(this.message);
+    console.log(this.loggedInUser.username);
   }
 
   resetCircuit() {

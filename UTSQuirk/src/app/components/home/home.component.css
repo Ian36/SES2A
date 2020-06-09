@@ -1,10 +1,32 @@
-/* Bordered form */
-form {
-  border: 3px solid #000000;
+
+
+/*login card*/
+.example-card {
+  max-width: 20em !important;
 }
 
-/* Full-width inputs */
-input[type=text],
+
+
+/*card centerer*/
+.card-holder{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* Full-width inputs*/
+/*input[type=text],
 input[type=password] {
   width: 100%;
   padding: 12px 20px;
@@ -13,8 +35,9 @@ input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-
+*/
 /* Set a style for all buttons */
+/*
 button {
   /*background-color: #0f4beb;
   color: #fff;
@@ -24,7 +47,7 @@ button {
   cursor: pointer;
   width: 100%;
   border-radius: 12px;*/
-  display: inline-block;
+  /*display: inline-block;
   padding: 6px 16px;
   font-size: 16px;
   cursor: pointer;
@@ -37,14 +60,15 @@ button {
   border-radius: 10px;
   box-shadow: 0 4px #999;
 }
+*/
 
-/* Add a hover effect for buttons */
+/* Add a hover effect for buttons 
 button:hover {
   /*opacity: 0.8;
   color: #000000;
   background-color: #fff;
   border: 3px solid #0f4beb;*/
-
+/*
   background-color: #270479
 
 }
@@ -54,7 +78,7 @@ button:hover {
   box-shadow: 0 1px rgb(219, 217, 217);
   transform: translateY(2px);
 }
-
+*/
 /* Center the avatar image inside this container */
 .imgcontainer {
   text-align: center;
@@ -73,10 +97,12 @@ span.psw {
   padding-top: 16px;
 }
 
+/*
 img {
   max-width: 100%;
   height: auto;
 }
+*/ 
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
@@ -86,10 +112,8 @@ img {
   }
 }
 
+/*
 table {
   width: 100%;
 }
-
-label{
-
-}
+*/
