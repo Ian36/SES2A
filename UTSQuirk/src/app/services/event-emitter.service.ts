@@ -7,11 +7,17 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class EventEmitterService {
 
   invokeFirstComponentFunction = new EventEmitter();
+  invokeSimulatorComponentRefreshProbability = new EventEmitter();
   subsVar: Subscription;
 
   constructor() { }
 
   refreshUserList() {
     this.invokeFirstComponentFunction.emit();
+  }
+
+  refreshProbability() {
+    console.log('refresh probability');
+    this.invokeSimulatorComponentRefreshProbability.emit();
   }
 }

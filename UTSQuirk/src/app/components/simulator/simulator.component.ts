@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CdkDragEnd, CdkDragStart, CdkDragMove,
+import {
+  CdkDragEnd, CdkDragStart, CdkDragMove,
   CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray,
   transferArrayItem, CdkDrag, CdkDropList, copyArrayItem
 } from '@angular/cdk/drag-drop';
 import { SimulatorService } from 'src/app/services/simulator.service';
 import { AddGate } from 'src/app/models/AddGate';
 import { User } from 'src/app/models/User';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class SimulatorComponent implements OnInit {
   todo = ['x', 'y', 'z', 'c'];
   done: string[][] = [[], []];
   trash = [];
-  dragPosition = {x: 0, y: 0};
+  dragPosition = { x: 0, y: 0 };
 
   @Input() message;
   loggedInUser: User;
@@ -27,7 +29,9 @@ export class SimulatorComponent implements OnInit {
   selectedValue: string[] = [' ', ' ', ' ', ' ', ' ', ' '];
   gates: string[] = [' ', 'x', 'y', 'z', 'h', 's', 't', 'cx', 'cz', 'swap', 'ccx'];
 
+  circuit;
   state = '';
+  bigState;
   position = '';
   customers = [
     { name: 'H', age: 23 },
@@ -46,9 +50,23 @@ export class SimulatorComponent implements OnInit {
     { name: 'H', age: 10 },
     { name: 'H', age: 24 }
   ];
-  constructor(private simulatorService: SimulatorService) { }
+
+  displayedColumns: string[] = ['Task Name', 'View', 'Submit'];
+
+
+  constructor(private simulatorService: SimulatorService, private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
+    console.log(this.eventEmitterService.subsVar);
+    if (this.eventEmitterService.subsVar !== undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.
+      invokeSimulatorComponentRefreshProbability.subscribe(() => {
+          console.log('getting probablity');
+          this.getProbability();
+          this.getCircuit();
+        });
+    }
+
     this.resetCircuit();
     this.resetCircuit();
     this.getProbability();
@@ -68,6 +86,14 @@ export class SimulatorComponent implements OnInit {
         console.log('error: ' + err);
       }
     );
+  }
+
+  getState() {
+    this.simulatorService.getState().subscribe(
+      res => {
+        console.log(res);
+        this.bigState = res.split('%');
+      });
   }
 
   changeInitialState(state: number) {
@@ -121,9 +147,41 @@ export class SimulatorComponent implements OnInit {
       res => {
         console.log(res);
         this.probability = res;
+        this.getState();
       },
       err => {
         console.log(err);
+      }
+    );
+  }
+
+  getCircuit() {
+    this.simulatorService.getCircuit().subscribe(
+      res => {
+        const circuit: string[][] = [];
+        console.log('gates: ' + res[0][0].name);
+        /* this.circuit.forEach(wire => {
+          const wireInput: string[] = [];
+          wire.forEach( gate => {
+            wireInput.push(gate.name);
+          });
+          circuit.push(wireInput);
+        });
+        console.log(circuit);
+        this.done = circuit; */
+        var i;
+        for (i = 0; i < res.length; i++) {
+          var j;
+          const wireInput: string[] = [];
+          for(j = 0; j < res[i].length; j++) {
+              if(res[i][j] !== null) {
+                wireInput.push(res[i][j].name);
+              }
+          }
+          circuit.push(wireInput);
+        }
+        this.done = circuit;
+        console.log(this.done);
       }
     );
   }
@@ -192,7 +250,7 @@ export class SimulatorComponent implements OnInit {
       console.log('moving gate around wire');
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      if (!isNaN(+(event.container.id))) {
+      if (!isNaN(+(event.container.id)) && event.previousContainer.id === 'contaner1') {
         console.log('adding gate to wire');
         copyArrayItem(event.previousContainer.data,
           event.container.data,
@@ -200,6 +258,25 @@ export class SimulatorComponent implements OnInit {
           event.currentIndex);
         console.log('gate number: ' + event.previousIndex);
         this.addGate(event.previousIndex, event.currentIndex, +(event.container.id));
+      }
+      if (!isNaN(+(event.container.id)) && event.previousContainer.id !== 'contaner1') {
+        console.log('adding gate to wire');
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+        console.log('gate number: ' + event.previousIndex);
+        let gateValue;
+        let counter = 0;
+        this.gates.forEach(g => {
+          if (g === event.container.data[0]) {
+            gateValue  = counter;
+          } else {
+            counter++;
+          }
+        });
+        this.addGate(0, event.previousIndex, +(event.previousContainer.id));
+        this.addGate(counter, event.currentIndex, +(event.container.id));
       }
       if (event.container.id === 'contaner3') {
         console.log('deleting gate on wire');

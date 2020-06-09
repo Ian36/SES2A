@@ -8,6 +8,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { SimulatorService } from 'src/app/services/simulator.service';
 import { CircuitFile } from 'src/app/models/CircuitFile';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
   selector: 'app-circuit-list-modal',
@@ -27,7 +28,8 @@ export class CircuitListModalComponent implements OnInit {
     private userService: UserService,
     private snackBar: MatSnackBar,
     private postService: PostService,
-    private simulatorService: SimulatorService
+    private simulatorService: SimulatorService,
+    private eventEmitterService: EventEmitterService
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +72,7 @@ export class CircuitListModalComponent implements OnInit {
     this.simulatorService.loadCircuit(circuit.fileName, this.loggedInUser.username).subscribe(
       res => {
         console.log(res);
+        this.eventEmitterService.refreshProbability();
       }
     );
   }

@@ -118,11 +118,29 @@ router.get('/load', async (req,res) => {
             }
         );
         circuit.load(loadedCircuit.circuit);
-        
         circuit.run();
         console.log(circuit.stateAsString(false));
         console.log('loaded circuit probability: ' + circuit.probabilities());
-        res.json('success');
+        res.json(circuit);
+    } catch (err) {
+        res.json({message: err});
+    }
+});
+
+
+router.get('/state', async (req,res) => {
+    console.log("loading state");
+    try{
+        res.json(circuit.stateAsString(false));
+    } catch (err) {
+        res.json({message: err});
+    }
+});
+
+router.get('/getCircuit', async (req,res) => {
+    console.log("getCircuit");
+    try{
+        res.json(circuit.gates);
     } catch (err) {
         res.json({message: err});
     }

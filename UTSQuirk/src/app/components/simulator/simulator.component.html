@@ -27,7 +27,7 @@
   </div>
 </div> -->
 
-<table style="height: 100px;" width="500">
+<!-- <table style="height: 100px;" width="500">
   <tbody>
     <tr>
       <td style="width: 100px;">Initial state</td>
@@ -123,15 +123,7 @@
     </tr>
   </tbody>
 </table>
-
-  <app-save-circuit-modal [message] = "loggedInUser"></app-save-circuit-modal>
-  <app-circuit-list-modal [message] = "loggedInUser"></app-circuit-list-modal>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
+ -->
 
 <div>
   <h3>Wires</h3>
@@ -140,40 +132,33 @@
 
 </div>
 <div cdkDropListGroup>
-<div class="quantum-options">
-  <div 
-  cdkDropList 
-  #todoList="cdkDropList"
-  [cdkDropListData]="gates"
-  id="contaner1"
-  class="quantum-options"
-  (cdkDropListDropped)="dropit($event)"
-  >
-    <div class="options" *ngFor="let item of gates" cdkDrag (cdkDragEnded)="dragEnd($event)">{{item}}</div>
+  <div class="quantum-options">
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="gates" id="contaner1" class="quantum-options"
+      (cdkDropListDropped)="dropit($event)">
+      <div class="options" *ngFor="let item of gates" cdkDrag (cdkDragEnded)="dragEnd($event)">{{item}}</div>
+    </div>
   </div>
-</div>
 
-<div class="quantum-options" *ngFor="let p of done; index as i">
-  <button mat-raised-button (click)="changeInitialState(i)">{{ selectedInitalState[i] }}</button>
-  <div
-  cdkDropList
-  #doneList="cdkDropList"
-  [cdkDropListData]="done[i]"
-  id="{{ i }}"
-  class="line-options"
-  (cdkDropListDropped)="dropit($event)"
-  >
-    <div class="options" *ngFor="let item of done[i]" cdkDrag>{{item}}</div>
-  </div>
-  <mat-progress-bar mode="determinate" value="{{probability[i] * 100}}"></mat-progress-bar>
+  <div class="quantum-options" *ngFor="let p of done; index as i">
+    <button mat-raised-button (click)="changeInitialState(i)">{{ selectedInitalState[i] }}</button>
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done[i]" id="{{ i }}" class="line-options"
+      (cdkDropListDropped)="dropit($event)">
+      <div class="options" *ngFor="let item of done[i]" cdkDrag>{{item}}</div>
+    </div>
+    <mat-progress-bar mode="determinate" value="{{probability[i] * 100}}"></mat-progress-bar>
     <h3> {{ probability[i] }}</h3>
-</div>
+  </div>
 
-<div class="quantum-options">
-  <h2>Remove Gate</h2>
-  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="trash" [cdkDropListConnectedTo]="[todoList]"
-    id="contaner3" class="quantum-options" (cdkDropListDropped)="dropit($event)">
-    <div class="options" *ngFor="let item of trash" cdkDrag>{{item}}</div>
+  <div class="quantum-options">
+    <h2>Remove Gate</h2>
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="trash" [cdkDropListConnectedTo]="[todoList]"
+      id="contaner3" class="quantum-options" (cdkDropListDropped)="dropit($event)">
+      <div class="options" *ngFor="let item of trash" cdkDrag>{{item}}</div>
+    </div>
   </div>
 </div>
-</div>
+
+<p *ngFor="let state of bigState">{{ state }}%</p>
+
+<app-save-circuit-modal [message]="loggedInUser"></app-save-circuit-modal>
+<app-circuit-list-modal [message]="loggedInUser"></app-circuit-list-modal>
