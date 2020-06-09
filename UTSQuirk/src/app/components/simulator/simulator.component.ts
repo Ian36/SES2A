@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragEnd, CdkDragStart, CdkDragMove,
+import {
+  CdkDragEnd, CdkDragStart, CdkDragMove,
   CdkDragDrop, CdkDragEnter, CdkDragExit, moveItemInArray,
-  transferArrayItem, CdkDrag, CdkDropList, copyArrayItem } from '@angular/cdk/drag-drop';
+  transferArrayItem, CdkDrag, CdkDropList, copyArrayItem
+} from '@angular/cdk/drag-drop';
 import { SimulatorService } from 'src/app/services/simulator.service';
 import { AddGate } from 'src/app/models/AddGate';
 
@@ -12,6 +14,11 @@ import { AddGate } from 'src/app/models/AddGate';
   styleUrls: ['./simulator.component.css']
 })
 export class SimulatorComponent implements OnInit {
+  todo = ['x', 'y', 'z', 'c'];
+  done: string[][] = [[], []];
+  trash = [];
+  dragPosition = {x: 0, y: 0};
+
   probability: number[] = [0, 0];
   initalStates: string[] = ['|0>', '|1>'];
   selectedInitalState: string[] = ['|0>', '|0>'];
@@ -28,14 +35,14 @@ export class SimulatorComponent implements OnInit {
     { name: 'H', age: 42 },
   ];
   inactiveCustomers = [
-    {name: 'H', age: 18},
-    {name: 'H', age: 16},
-    {name: 'H', age: 36}
+    { name: 'H', age: 18 },
+    { name: 'H', age: 16 },
+    { name: 'H', age: 36 }
   ];
 
   activeCustomers = [
-    {name: 'H', age: 10},
-    {name: 'H', age: 24}
+    { name: 'H', age: 10 },
+    { name: 'H', age: 24 }
   ];
   constructor(private simulatorService: SimulatorService) { }
 
@@ -59,14 +66,20 @@ export class SimulatorComponent implements OnInit {
   }
 
   changeInitialState(state: number) {
+    if (this.selectedInitalState[state] === '|0>') {
+      this.selectedInitalState[state] = '|1>';
+    } else {
+      this.selectedInitalState[state] = '|0>';
+    }
+
     console.log('changeInitialState to ' + this.selectedInitalState[state]);
     this.getProbability();
   }
 
   addGate(gate: number, inColumn: number, inWire: number) {
-    console.log('Adding ' + this.selectedValue[gate] + ' to column ' + inColumn + ', wire ' + inWire);
+    console.log('Adding ' + this.gates[gate] + ' to column ' + inColumn + ', wire ' + inWire);
     const newGate: AddGate = {
-      gate: this.selectedValue[gate],
+      gate: this.gates[gate],
       column: inColumn,
       wire: inWire
     };
@@ -80,9 +93,25 @@ export class SimulatorComponent implements OnInit {
     );
   }
 
+  increaseWire() {
+    this.selectedInitalState.push('|0>');
+    this.done.push([]);
+    this.probability.push(0);
+    this.getProbability();
+  }
+
+  decreaseWire() {
+    this.probability.pop();
+    this.selectedInitalState.pop();
+    this.done.pop();
+    this.getProbability();
+  }
 
   getProbability() {
-    const states = [+(this.selectedInitalState[0].substring(1, 2)), +(this.selectedInitalState[1].substring(1, 2))];
+    const states = [];
+    this.selectedInitalState.forEach(sis => {
+      states.push(+(sis.substring(1, 2)));
+    });
     this.simulatorService.getProbability(states).subscribe(
       res => {
         console.log(res);
@@ -151,45 +180,43 @@ export class SimulatorComponent implements OnInit {
     console.log('Sorted:', event);
   }
 
-
-  todo = [
-    'x',
-    'y',
-    'z',
-    'c'
-  ];
-
-  done = [
-    
-  ];
-
-  trash = [];
-
   dropit(event: CdkDragDrop<string[]>) {
-    
-    if (event.previousContainer === event.container) {
+    console.log('dropped it');
+    console.log(event.container.id);
+    if (event.previousContainer === event.container && event.container.id !== 'contaner1') {
+      console.log('moving gate around wire');
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      if( event.container.id=="contaner2"){
-      copyArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-                      }
-
-       if( event.container.id=="contaner3"){
+      if (!isNaN(+(event.container.id))) {
+        console.log('adding gate to wire');
+        copyArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
+        console.log('gate number: ' + event.previousIndex);
+        this.addGate(event.previousIndex, event.currentIndex, +(event.container.id));
+      }
+      if (event.container.id === 'contaner3') {
+        console.log('deleting gate on wire');
         transferArrayItem(event.previousContainer.data,
           event.container.data,
           event.previousIndex,
           event.currentIndex);
-       
-                                        }                
-                        
+        this.addGate(0, event.currentIndex, +(event.previousContainer.id));
+      }
     }
-
     this.trash.length = 0;
 
+    console.log(this.done);
+    this.getProbability();
+  }
 
+  printPosition() {
+    console.log(this.dragPosition);
+  }
+
+  dragEnd($event: CdkDragEnd) {
+    console.log($event.source.getFreeDragPosition());
   }
 }
 

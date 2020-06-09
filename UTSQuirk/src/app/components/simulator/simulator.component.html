@@ -29,150 +29,151 @@
 
 <table style="height: 100px;" width="500">
   <tbody>
-  <tr>
-  <td style="width: 100px;">Initial state</td>
-  <td style="width: 100px;">Coloumn 1</td>
-  <td style="width: 100px;">Coloumn 2</td>
-  <td style="width: 100px;">Coloumn 3</td>
-  <td style="width: 100px;">Histogram</td>
-  <td style="width: 100px;">Probability</td>
-  </tr>
-  <tr>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select  [(ngModel)]="selectedInitalState[0]" (ngModelChange)="changeInitialState(0)">
-        <mat-option *ngFor="let state of initalStates" [value]="state">
-          {{state}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[0]" (ngModelChange)="addGate(0, 0, 0)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[1]" (ngModelChange)="addGate(1, 1, 0)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[2]" (ngModelChange)="addGate(2, 2, 0)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-    <td style="width: 100px;">
-      <mat-progress-bar mode="determinate" value="{{probability[0] * 100}}"></mat-progress-bar>
-    </td>
-  <td style="width: 100px; ">      {{ probability[0]}}</td>
-  </tr>
-  <tr>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedInitalState[1]" (ngModelChange)="changeInitialState(1)">
-        <mat-option *ngFor="let state of initalStates" [value]="state">
-          {{state}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[3]" (ngModelChange)="addGate(3, 0, 1)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[4]" (ngModelChange)="addGate(4, 1, 1)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-  <td style="width: 100px;">
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedValue[5]" (ngModelChange)="addGate(5, 2, 1)">
-        <mat-option *ngFor="let gate of gates" [value]="gate">
-          {{gate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    </td>
-    <td style="width: 100px;">
-      <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
-    </td>
-  <td style="width: 100px;">      {{ probability[1] }}</td>
-  </tr>
+    <tr>
+      <td style="width: 100px;">Initial state</td>
+      <td style="width: 100px;">Coloumn 1</td>
+      <td style="width: 100px;">Coloumn 2</td>
+      <td style="width: 100px;">Coloumn 3</td>
+      <td style="width: 100px;">Histogram</td>
+      <td style="width: 100px;">Probability</td>
+    </tr>
+    <tr>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedInitalState[0]" (ngModelChange)="changeInitialState(0)">
+            <mat-option *ngFor="let state of initalStates" [value]="state">
+              {{state}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[0]" (ngModelChange)="addGate(0, 0, 0)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[1]" (ngModelChange)="addGate(1, 1, 0)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[2]" (ngModelChange)="addGate(2, 2, 0)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-progress-bar mode="determinate" value="{{probability[0] * 100}}"></mat-progress-bar>
+      </td>
+      <td style="width: 100px; "> {{ probability[0]}}</td>
+    </tr>
+    <tr>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedInitalState[1]" (ngModelChange)="changeInitialState(1)">
+            <mat-option *ngFor="let state of initalStates" [value]="state">
+              {{state}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[3]" (ngModelChange)="addGate(3, 0, 1)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[4]" (ngModelChange)="addGate(4, 1, 1)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedValue[5]" (ngModelChange)="addGate(5, 2, 1)">
+            <mat-option *ngFor="let gate of gates" [value]="gate">
+              {{gate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 100px;">
+        <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
+      </td>
+      <td style="width: 100px;"> {{ probability[1] }}</td>
+    </tr>
   </tbody>
-  </table>
+</table>
 
-  <app-save-circuit-modal></app-save-circuit-modal>
-  <app-circuit-list-modal></app-circuit-list-modal>
-  
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
+<app-save-circuit-modal></app-save-circuit-modal>
+<app-circuit-list-modal></app-circuit-list-modal>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 
- 
-  <div class="quantum-options">
-   <div cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
-    id = "contaner1"
-    class="quantum-options"
-    (cdkDropListDropped)="dropit($event)">
-   <div class="options" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-   </div>
+<div>
+  <h3>Wires</h3>
+  <button mat-raised-button (click)="increaseWire()">+</button>
+  <button mat-raised-button (click)="decreaseWire()">-</button>
+
+</div>
+<div cdkDropListGroup>
+<div class="quantum-options">
+  <div 
+  cdkDropList 
+  #todoList="cdkDropList"
+  [cdkDropListData]="gates"
+  id="contaner1"
+  class="quantum-options"
+  (cdkDropListDropped)="dropit($event)"
+  >
+    <div class="options" *ngFor="let item of gates" cdkDrag (cdkDragEnded)="dragEnd($event)">{{item}}</div>
   </div>
+</div>
 
-  <div class="quantum-options">
-      <div class="line-options"
-       cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
-    id = "contaner2"
-    (cdkDropListDropped)="dropit($event)"> 
-      <div class="line" *ngFor="let item of done" cdkDrag>{{item}}</div>
-    <td style="width: 100px;">
-    </td>
-    <td style="width: 100px;">
-      <mat-progress-bar mode="determinate" value="{{probability[1] * 100}}"></mat-progress-bar>
-    </td>
-     <td style="width: 100px;">      {{ probability[1] }}</td>
-      </div>
+<div class="quantum-options" *ngFor="let p of done; index as i">
+  <button mat-raised-button (click)="changeInitialState(i)">{{ selectedInitalState[i] }}</button>
+  <div
+  cdkDropList
+  #doneList="cdkDropList"
+  [cdkDropListData]="done[i]"
+  id="{{ i }}"
+  class="line-options"
+  (cdkDropListDropped)="dropit($event)"
+  >
+    <div class="options" *ngFor="let item of done[i]" cdkDrag>{{item}}</div>
   </div>
+  <mat-progress-bar mode="determinate" value="{{probability[i] * 100}}"></mat-progress-bar>
+    <h3> {{ probability[i] }}</h3>
+</div>
 
-   <div class="quantum-options">
-   <h2>Trash</h2>
-   <div cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="trash"
-    [cdkDropListConnectedTo]="[todoList]"
-    id = "contaner3"
-    class="quantum-options"
-    (cdkDropListDropped)="dropit($event)">
-   <div class="options" *ngFor="let item of trash" cdkDrag>{{item}}</div>
-   </div>
+<div class="quantum-options">
+  <h2>Remove Gate</h2>
+  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="trash" [cdkDropListConnectedTo]="[todoList]"
+    id="contaner3" class="quantum-options" (cdkDropListDropped)="dropit($event)">
+    <div class="options" *ngFor="let item of trash" cdkDrag>{{item}}</div>
   </div>
+</div>
+</div>

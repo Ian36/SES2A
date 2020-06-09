@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
     }
 
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+
+    this.username = 'user2';
+    this.password = 'password';
+    this.login();
   }
 
   login() {
