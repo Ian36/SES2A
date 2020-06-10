@@ -29,7 +29,7 @@ npm install express --save
 
 and the server can be launched by running:
 
-node index.js
+node app.js
 
 Both components of the project must be running in order to be fully functional
 
